@@ -23,7 +23,7 @@ airport_array = [["JFK", "NYC John F Kennedy International Airport"],
                  ["PHX", "Phoenix Sky Harbor International Airport"],
                  ["SAN", "San Diego International Airport"],
                  ["SFO", "San Francisco International Airport"],
-                 ["SJU", "San Juan PR Luis Munox Marin International Airport"],
+                 ["SJU", "San Juan PR Luis Munoz Marin International Airport"],
                  ["SLC", "Salt Lake City International Airport"],
                  ["STT", "Cyril E King Airport"],
                  ["STX", "Henry E Rohlson Airport"]]
