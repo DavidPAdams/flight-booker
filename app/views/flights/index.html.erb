@@ -1,2 +1,36 @@
 <h1>Search for a Flight</h1>
 <hr>
+<%= form_for(flights_path, method: :get) do |f| %>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :departure_airport_id, "Departing from:" %>
+        <%= f.select(:departure_airport_id, 
+                     options_for_select(@airport_choices, params[:departure_airport_id])) %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :arrival_airport_id, "Arriving to:" %>
+        <%= f.select(:arrival_airport_id, 
+                     options_for_select(@airport_choices, params[:arrival_airport_id])) %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :passenger_count, "Number of Passengers:" %>
+        <%= f.select(:passenger_count, 
+                     options_for_select(@passenger_choices, params[:passenger_count])) %>
+      </div>
+    </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.submit "Search Flights", class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
+
+
+  <%= @flight_choices.first %>
+
