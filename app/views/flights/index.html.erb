@@ -1,36 +1,25 @@
-<h1>Search for a Flight</h1>
-<hr>
-<%= form_for(flights_path, method: :get) do |f| %>
 
-    <div class="col-md-4">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Search for a Flight</h1>
+    <hr>
+    <%= form_tag(flights_path, method: :get) do %>
       <div class="form-group">
-        <%= f.label :departure_airport_id, "Departing from:" %>
-        <%= f.select(:departure_airport_id, 
-                     options_for_select(@airport_choices, params[:departure_airport_id])) %>
+        <%= label_tag :departure_airport_id, "Departing from:" %>
+        <%= select_tag(:departure_airport_id, options_for_select(@airport_choices, @departure_airport), class: "form-control") %>
       </div>
-    </div>
-    <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :arrival_airport_id, "Arriving to:" %>
-        <%= f.select(:arrival_airport_id, 
-                     options_for_select(@airport_choices, params[:arrival_airport_id])) %>
+        <%= label_tag :arrival_airport_id, "Arriving to:" %>
+        <%= select_tag(:arrival_airport_id, options_for_select(@airport_choices, @arrival_airport), class: "form-control") %>
       </div>
-    </div>
-    <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :passenger_count, "Number of Passengers:" %>
-        <%= f.select(:passenger_count, 
-                     options_for_select(@passenger_choices, params[:passenger_count])) %>
+        <%= label_tag :passenger_count, "Number of Passengers:" %>
+        <%= select_tag(:passenger_count, options_for_select(@passenger_choices, @passenger_count), class: "form-control") %>
       </div>
-    </div>
-
-  <div class="col-md-4">
-    <div class="form-group">
-      <%= f.submit "Search Flights", class: "btn btn-success" %>
-    </div>
+      <%= submit_tag "Search Flights", class: "btn btn-success " %>      
+    <% end %>
   </div>
-<% end %>
 
 
-  <%= @flight_choices.first %>
+<%= params %>
+  <%= @flights.count %>
 
