@@ -38,7 +38,7 @@ end
       if i != j
         Flight.create!(departure_airport_id: i+1,
                        arrival_airport_id: j+1,
-                       departure_time: rand(3..10).days.from_now,
+                       departure_time: rand(5000..30000).minutes.from_now,
                        duration: rand(100..600))
       end
     end
