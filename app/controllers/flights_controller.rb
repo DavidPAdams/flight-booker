@@ -7,7 +7,7 @@ class FlightsController < ApplicationController
     @arrival_airport = params[:arrival_airport_id]
     @passenger_count = params[:passenger_count]
     @depart_date = params[:depature_time]
-    @flights = Flight.available_flights(params[:departure_airport_id], params[:arrival_airport_id])
+    @flights = Flight.available_flights(params[:departure_airport_id], params[:arrival_airport_id]).order(departure_time: :asc)
     @flight_dates = Flight.date_list(params[:departure_airport_id], params[:arrival_airport_id])
 
     if params[:commit] == "Search Flights"
