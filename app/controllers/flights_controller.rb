@@ -3,14 +3,17 @@ class FlightsController < ApplicationController
   def index
     @airport_choices = Airport.all.order(code: :asc).map{ |a| ["#{a.code} - #{a.name}", a.id] }
     @passenger_choices = (1..4).map{ |p| ["#{p} " + 'person'.pluralize(p), p] }
+    @departure_airport = params[:departure_airport_id]
+    @arrival_airport = params[:arrival_airport_id]
+    @passenger_count = params[:passenger_count]
+    @depart_date = params[:depature_time]
+    @flights = Flight.available_flights(params[:departure_airport_id], params[:arrival_airport_id])
+    @flight_dates = Flight.date_list(params[:departure_airport_id], params[:arrival_airport_id])
 
-    if !params.nil?
-      @passenger_count = params[:passenger_count]
-      @flight_choices = Flight.where(departure_airport_id: params[:departure_airport_id])
-                              .where(arrival_airport_id: params[:arrival_airport_id])
-      render :index
-    else
-      render :index
+    if params[:commit] == "Search Flights"
+      if params[:departure_airport_id] == params[:arrival_airport_id]
+        flash[:danger] = "Your Departure and Arrival Airports Can Not Be the Same"  
+      end
     end
   end
 
