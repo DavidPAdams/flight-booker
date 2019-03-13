@@ -1,25 +1,59 @@
-
-  <div class="col-md-6 col-md-offset-3">
-    <h1>Search for a Flight</h1>
-    <hr>
-    <%= form_tag(flights_path, method: :get) do %>
-      <div class="form-group">
-        <%= label_tag :departure_airport_id, "Departing from:" %>
-        <%= select_tag(:departure_airport_id, options_for_select(@airport_choices, @departure_airport), class: "form-control") %>
-      </div>
-      <div class="form-group">
-        <%= label_tag :arrival_airport_id, "Arriving to:" %>
-        <%= select_tag(:arrival_airport_id, options_for_select(@airport_choices, @arrival_airport), class: "form-control") %>
-      </div>
-      <div class="form-group">
-        <%= label_tag :passenger_count, "Number of Passengers:" %>
-        <%= select_tag(:passenger_count, options_for_select(@passenger_choices, @passenger_count), class: "form-control") %>
-      </div>
-      <%= submit_tag "Search Flights", class: "btn btn-success " %>      
-    <% end %>
-  </div>
-
-
-<%= params %>
-  <%= @flights.count %>
+<div class="col-md-8 col-md-offset-2">
+  <h1>Search for a Flight</h1>
+  <hr>
+  <%= form_tag(flights_path, method: :get) do %>
+    <div class="form-group">
+      <%= label_tag :departure_airport_id, "Departing from:" %>
+      <%= select_tag(:departure_airport_id, options_for_select(@airport_choices, @departure_airport), class: "form-control") %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :arrival_airport_id, "Arriving to:" %>
+      <%= select_tag(:arrival_airport_id, options_for_select(@airport_choices, @arrival_airport), class: "form-control") %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :passenger_count, "Number of Passengers:" %>
+      <%= select_tag(:passenger_count, options_for_select(@passenger_choices, @passenger_count), class: "form-control") %>
+    </div>
+    <%= submit_tag "Search Flights", class: "btn btn-success " %>      
+  <% end %>
+</div>
+<hr>
+<% if !@flights.empty? %>
+  <div class="col-md-12">
+    <h5>Available Flights</h5>
+    <p>From: <%= "#{@flights.first.departure_airport.code} - #{@flights.first.departure_airport.name}" %></p>
+    <p>To: <%= "#{@flights.first.arrival_airport.code} - #{@flights.first.arrival_airport.name}" %></p>
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th><!-- (radio button) --></th>
+          <th>Flight</th>
+          <th>Departing</th>
+          <th>Arriving</th>
+          <th>Flight Departs</th>
+          <th>Flight Duration</th>
+        </tr>
+      </thead>
+      <%= form_tag(new_reservation_path, method: :get) do %>
+        <tbody>
+          <% @flights.each do |flight| %>
+            <tr>
+              <td><%= radio_button_tag(:flight_id, flight.id, class: "flight_select") %></td>
+              <td><%= flight.id %></td>
+              <td><%= flight.departure_airport.code %></td>
+              <td><%= flight.arrival_airport.code %></td>
+              <td><%= flight.departure_time.strftime("%a %d %b %Y at %I:%M %P") %></td>
+              <td><%= "#{flight.duration/60} hrs #{flight.duration%60} mins" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <%= hidden_field_tag(:passenger_count, params[:passenger_count]) %>
+      </table>
+      <hr>
+        <%= submit_tag("Choose Flight", class: "btn btn-warning") %>
+        <br />
+      <% end %>
+<!--     </table>
+ -->  </div>
+<% end %>
 
