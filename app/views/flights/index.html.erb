@@ -1,5 +1,5 @@
 <div class="col-md-8 col-md-offset-2">
-  <h1>Search for a Flight</h1>
+  <h3>Search for a Flight</h3>
   <hr>
   <%= form_tag(flights_path, method: :get) do %>
     <div class="form-group">
@@ -27,11 +27,11 @@
       <thead>
         <tr>
           <th><!-- (radio button) --></th>
-          <th>Flight</th>
-          <th>Departing</th>
-          <th>Arriving</th>
-          <th>Flight Departs</th>
-          <th>Flight Duration</th>
+          <th>Flight #</th>
+          <th>Departs</th>
+          <th>Arrives</th>
+          <th>Departure Time</th>
+          <th class="text-right">Flight Duration</th>
         </tr>
       </thead>
       <%= form_tag(new_reservation_path, method: :get) do %>
@@ -39,11 +39,11 @@
           <% @flights.each do |flight| %>
             <tr>
               <td><%= radio_button_tag(:flight_id, flight.id, class: "flight_select") %></td>
-              <td><%= flight.id %></td>
-              <td><%= flight.departure_airport.code %></td>
-              <td><%= flight.arrival_airport.code %></td>
-              <td><%= flight.departure_time.strftime("%a %d %b %Y at %I:%M %P") %></td>
-              <td><%= "#{flight.duration/60} hrs #{flight.duration%60} mins" %></td>
+              <td class="text-right"><%= flight.id %></td>
+              <td class="text-center"><%= flight.departure_airport.code %></td>
+              <td class="text-center"><%= flight.arrival_airport.code %></td>
+              <td><%= flight.departure_time.strftime("%a %d %b %y at %I:%M %P") %></td>
+              <td class="text-right"><%= "#{flight.duration/60} hrs #{flight.duration%60} mins" %></td>
             </tr>
           <% end %>
         </tbody>
@@ -51,7 +51,7 @@
       </table>
       <hr>
         <%= submit_tag("Choose Flight", class: "btn btn-warning") %>
-        <br />
+        <hr>
       <% end %>
 <!--     </table>
  -->  </div>
