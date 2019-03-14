@@ -21,8 +21,8 @@
 <% if !@flights.empty? %>
   <div class="col-md-12">
     <h5>Available Flights</h5>
-    <p>From: <%= "#{@flights.first.departure_airport.code} - #{@flights.first.departure_airport.name}" %></p>
-    <p>To: <%= "#{@flights.first.arrival_airport.code} - #{@flights.first.arrival_airport.name}" %></p>
+    <p>From: <b><%= "#{@flights.first.departure_airport.code} - #{@flights.first.departure_airport.name}" %></b></p>
+    <p>To: <b><%= "#{@flights.first.arrival_airport.code} - #{@flights.first.arrival_airport.name}" %></b></p>
     <table class="table-striped">
       <thead>
         <tr>
@@ -50,10 +50,9 @@
         <%= hidden_field_tag(:passenger_count, params[:passenger_count]) %>
       </table>
       <hr>
-        <%= submit_tag("Choose Flight", class: "btn btn-warning") %>
-        <hr>
-      <% end %>
-<!--     </table>
- -->  </div>
+      <%= submit_tag("Choose Flight", class: "btn btn-warning") %>
+      <hr>
+    <% end %>
+  </div>
 <% end %>
 
