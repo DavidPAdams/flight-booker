@@ -4,6 +4,9 @@ class Flight < ApplicationRecord
   has_many :reservations
   has_many :passengers, through: :reservations
 
+  validates :departure_airport_id, presence: true
+  validates :arrival_airport_id, presence: true
+
   def self.available_flights(depart_from, arrive_to)
     Flight.where(departure_airport_id: depart_from)
           .where(arrival_airport_id: arrive_to)
