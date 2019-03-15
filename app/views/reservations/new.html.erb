@@ -2,6 +2,8 @@
   <h1>Reservation Details</h1>
   <hr>
   <p>Please enter Passenger information for selected flight:</p>
+  <p>Flight: <b>#<%= @flight.id %>, <%= "From #{@flight.departure_airport.name} to #{@flight.arrival_airport.name}" %></b></p>
+  <p>Date & Departure Time: <b><%= @flight.departure_time.strftime("%a %d %b %Y at %I:%M %P") %></b></p>
   <div class="well">
     
 
