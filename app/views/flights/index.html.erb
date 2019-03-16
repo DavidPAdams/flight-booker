@@ -14,12 +14,12 @@
       <%= label_tag :passenger_count, "Number of Passengers:" %>
       <%= select_tag(:passenger_count, options_for_select(@passenger_choices, @passenger_count), class: "form-control") %>
     </div>
-    <%= submit_tag "Search Flights", class: "btn btn-success " %>      
+    <%= submit_tag "Search Flights", class: "btn btn-success form-control" %>      
   <% end %>
 </div>
 <hr>
 <% if !@flights.empty? %>
-  <div class="col-md-12">
+  <div class="col-md-10 col-md-offset-2">
     <h5>Available Flights</h5>
     <p>From: <b><%= "#{@flights.first.departure_airport.code} - #{@flights.first.departure_airport.name}" %></b></p>
     <p>To: <b><%= "#{@flights.first.arrival_airport.code} - #{@flights.first.arrival_airport.name}" %></b></p>
@@ -47,10 +47,10 @@
             </tr>
           <% end %>
         </tbody>
-        <%= hidden_field_tag(:passenger_count, params[:passenger_count]) %>
+        <%= hidden_field_tag(:passenger_count, @passenger_count) %>
       </table>
       <hr>
-      <%= submit_tag("Choose Flight", class: "btn btn-warning") %>
+      <%= submit_tag("Choose Flight", class: "btn btn-warning form-control") %>
       <hr>
     <% end %>
   </div>
