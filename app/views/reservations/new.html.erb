@@ -1,9 +1,27 @@
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-8 col-md-offset-2">
   <h1>Reservation Details</h1>
   <hr>
   <p>Please enter Passenger information for selected flight:</p>
   <p>Flight: <b>#<%= @flight.id %>, <%= "From #{@flight.departure_airport.name} to #{@flight.arrival_airport.name}" %></b></p>
   <p>Date & Departure Time: <b><%= @flight.departure_time.strftime("%a %d %b %Y at %I:%M %P") %></b></p>
   <div class="well">
-    
+    <h3>Passenger Information:</h3>
+    <%= form_for @reservation do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.hidden_field :flight_id %>
+      <% @i = 1 %>
+      <% @travelers.times do %>
+        <%= f.fields_for :passenger do |p| %>
+          <P><%= p.label "#{@i.ordinalize} passenger:" %></P>
+          <p><%= p.text_field :name, placeholder: "Name", autofocus: true, required: true, class: "form-control" %></p>
+          <p><%= p.email_field :email, placeholder: "email", required: true, class: "form-control" %></p>
+          <% @i += 1 %>
+          <hr>
+        <% end %>
+      <% end %>
+      <%= f.submit "Confirm Reservation", class: "btn btn-success form-control" %>
+      <br><br>
+    <% end %>
+  </div>
+</div>
 
