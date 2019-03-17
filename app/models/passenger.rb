@@ -1,5 +1,5 @@
 class Passenger < ApplicationRecord
-  belongs_to :reservation
+  belongs_to :reservation, inverse_of: :passengers
   has_many :flights, through: :reservations
   before_save :downcase_email
 
