@@ -18,13 +18,14 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find_by(params[:id])
+    @travelers = Passenger.where(reservation_id: params[:id])
   end
 
   private
 
     def reservation_params
-      params.require(:reservation).permit(:flight_id, :passenger_count, passenger_attributes: [:id, :name, :email])
+      params.require(:reservation).permit(:flight_id, passengers_attributes: [:id, :name, :email])
     end
 
 end
