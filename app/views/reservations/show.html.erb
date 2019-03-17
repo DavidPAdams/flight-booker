@@ -1,2 +1,19 @@
-<h1>Reservations#show</h1>
-<p>Find me in app/views/reservations/show.html.erb</p>
+<h1 class="text-center">Reservation Confirmation Information</h1>
+<hr>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2>Flight Details:</h2>
+    <p>Number: <b><%= @reservation.flight.id %></b></p>
+    <p>Origination: <b><%= @reservation.flight.departure_airport.code %> - <%= @reservation.flight.departure_airport.name %></b></p>
+    <p>Destination: <b><%= @reservation.flight.arrival_airport.code %> - <%= @reservation.flight.arrival_airport.name %></b></p>
+    <p>Departure: <b><%= @reservation.flight.departure_time.strftime("%a %d %b %Y at %I:%M %P") %></b></p>
+    <p>Flight Duration: <b><%= pluralize(@reservation.flight.duration/60, 'hr') %> <%= pluralize(@reservation.flight.duration%60, 'min') %></b></p>
+    <h3>Passenger Details:</h3>
+    <% i = 1 %>
+    <% @travelers.each do |traveler| %>
+      <P><%= "#{i.ordinalize} passenger: " %><b><%= traveler.name %>, <%= traveler.email %></b></p>
+      <% i += 1 %>
+    <% end %>
+    <%= link_to "Start Again", root_path, class: "btn btn-info form-control" %>
+  </div>
+</div>
