@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = Reservation.find_by(params[:id])
+    @reservation = Reservation.find_by(id: params[:id])
     @travelers = Passenger.where(reservation_id: params[:id])
   end
 
